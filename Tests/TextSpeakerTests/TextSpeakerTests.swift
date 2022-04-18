@@ -27,4 +27,10 @@ final class SpeakingMock: TextSpeaking {
         receivedText = text
         receivedLanguage = language
     }
+    
+    var isSpeakingCalls = 0
+    func isSpeaking() -> Bool {
+        isSpeakingCalls += 1
+        return true
+    }
 }
