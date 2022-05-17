@@ -1,7 +1,12 @@
 import AVFoundation
 
 public protocol TextSpeaking: AnyObject {
-    func speak(_ text: String, language: String)
+    func speak(
+        _ text: String,
+        language: String,
+        audioSessionCategory: AVAudioSession.Category,
+        options: AVAudioSession.CategoryOptions
+    )
     func isSpeaking() -> Bool
 }
 
@@ -11,7 +16,13 @@ public final class TextSpeaker: TextSpeaking {
     
     public init() {}
 
-    public func speak(_ text: String, language: String = "en-US") {
+    public func speak(
+        _ text: String,
+        language: String = "en-US",
+        audioSessionCategory: AVAudioSession.Category = .playAndRecord,
+        options: AVAudioSession.CategoryOptions = .allowBluetooth
+    ) {
+        try? AVAudioSession.sharedInstance().setCategory(audioSessionCategory, options: options)
         // Create an instance of AVSpeechUtterance and pass in a String to be spoken.
         let speechUtterance: AVSpeechUtterance = AVSpeechUtterance(string: text)
         // Specify the voice. It is explicitly set to English here.
