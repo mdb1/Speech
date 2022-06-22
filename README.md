@@ -1,4 +1,4 @@
-# Speech
+# TextSpeaker
 
 Lightweight text to speech library.
 
